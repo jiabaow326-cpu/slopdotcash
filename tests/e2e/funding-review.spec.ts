@@ -178,6 +178,8 @@ test("public funding records and the payout workspace are separate tabs", async 
   await expect(records).toHaveAttribute("aria-selected", "true");
   await page.goto("/projects/eliza/funding#payouts");
   await expect(payouts).toHaveAttribute("aria-selected", "true");
+  // Use an editable preparation, not a published review that can expire.
+  await page.getByLabel("Contribution month").selectOption("2026-08");
   // Audit the settled workspace, not its loading transition.
   await expect(page.locator(".recipient-row").first()).toBeVisible();
   await expect(
